@@ -1,3 +1,5 @@
+"use client";
+import { useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { FiChevronDown } from "react-icons/fi";
 import { FiUser } from "react-icons/fi";
@@ -5,11 +7,16 @@ import { FiShoppingBag } from "react-icons/fi";
 import { HiBars2 } from "react-icons/hi2";
 
 export default function Navbar() {
+  const dropdown = useRef();
+
+  const [ishidden, setishidden] = useState(true);
+
+  function onclickhandle() {
+    setishidden(!ishidden);
+  }
+
   return (
-    <nav
-      x-data="{ isOpen: false }"
-      className="bg-transparent border-b border-gray-100 border-opacity-50 justify-center items-center text-white absolute top-0 left-0 right-0"
-    >
+    <nav className="bg-transparent border-b border-gray-100 border-opacity-50 justify-center items-center text-white absolute top-0 left-0 right-0">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <div className="text-center">
           <a href="#">
@@ -17,9 +24,57 @@ export default function Navbar() {
           </a>
         </div>
 
-        <div className="dropdown">
-          <HiBars2 className="visible sm:invisible" size={"1.8rem"} />
+        <div>
+          <button onClick={onclickhandle}>
+            <HiBars2 className="visible sm:invisible" size={"1.8rem"} />
+          </button>
         </div>
+
+        {!ishidden && (
+          <div
+            id="dropdown"
+            ref={dropdown}
+            className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+          >
+            <ul
+              className="py-2 text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="dropdownDefaultButton"
+            >
+              <li>
+                <a
+                  href="#"
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  Settings
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  Earnings
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  Sign out
+                </a>
+              </li>
+            </ul>
+          </div>
+        )}
 
         <div className="flex sm:visible md:visible lg:visible xl:visible invisible overflow-hidden h-12 font-inter text-white items-center justify-center text-base/4">
           <a href="#">

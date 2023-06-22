@@ -14,9 +14,11 @@ export const metadata = {
 export default function RootLayout() {
   return (
     <html lang="en">
+      <body>
       <Header></Header>
       <Navbar></Navbar>
       <Body></Body>
+      </body>
     </html>
   );
 }
